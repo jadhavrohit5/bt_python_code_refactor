@@ -13,10 +13,23 @@ class GildedRose(object):
                 self._update_aged_brie(item)
             elif item.name == "Sulfuras, Hand of Ragnaros":
                 pass
+            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+                self._update_backstage_passes(item)
 
     def _update_aged_brie(self, item):
         if item.quality < GildedRose.MAX_QLTY:
             item.quality += 1
+        self._update_sell_in(item)
+
+    def _update_backstage_passes(self, item):
+        if item.quality < GildedRose.MAX_QLTY:
+            item.quality += 1
+            if item.sell_in < 11 and item.quality < GildedRose.MAX_QLTY:
+                item.quality += 1
+            if item.sell_in < 6 and item.quality < GildedRose.MAX_QLTY:
+                item.quality += 1
+        if item.sell_in < 0:
+            item.quality = 0
         self._update_sell_in(item)
 
     def _update_sell_in(self, item):
