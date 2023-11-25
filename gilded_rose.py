@@ -11,6 +11,8 @@ class GildedRose(object):
         for item in self.items:
             if item.name == "Aged Brie":
                 self._update_aged_brie(item)
+            elif item.name == "Sulfuras, Hand of Ragnaros":
+                pass
 
     def _update_aged_brie(self, item):
         if item.quality < GildedRose.MAX_QLTY:
@@ -18,7 +20,8 @@ class GildedRose(object):
         self._update_sell_in(item)
 
     def _update_sell_in(self, item):
-        item.sell_in -= 1
+        if item.name != "Sulfuras, Hand of Ragnaros":
+            item.sell_in -= 1
 
 
 class Item:
