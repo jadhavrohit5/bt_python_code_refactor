@@ -4,18 +4,23 @@ class GildedRose(object):
     MAX_QLTY = 50
     MIN_QLTY = 0
 
+    AGED_BRIE = "Aged Brie"
+    SULFURAS = "Sulfuras, Hand of Ragnaros"
+    BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
+    CONJURED = "Conjured Mana Cake"
+
     def __init__(self, items):
         self.items = items
 
     def update_quality(self):
         for item in self.items:
-            if item.name == "Aged Brie":
+            if item.name == GildedRose.AGED_BRIE:
                 self._update_aged_brie(item)
-            elif item.name == "Sulfuras, Hand of Ragnaros":
+            elif item.name == GildedRose.SULFURAS:
                 pass
-            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+            elif item.name == GildedRose.BACKSTAGE_PASSES:
                 self._update_backstage_passes(item)
-            elif item.name == "Conjured Mana Cake":
+            elif item.name == GildedRose.CONJURED:
                 self._update_conjured(item)
             else:
                 self._update_regular_product(item)
@@ -32,7 +37,7 @@ class GildedRose(object):
                 item.quality += 1
             if item.sell_in < 6 and item.quality < GildedRose.MAX_QLTY:
                 item.quality += 1
-        if item.sell_in < 0:
+        if item.sell_in < GildedRose.MIN_QLTY:
             item.quality = 0
         self._update_sell_in(item)
 
@@ -51,7 +56,7 @@ class GildedRose(object):
         self._update_sell_in(item)
 
     def _update_sell_in(self, item):
-        if item.name != "Sulfuras, Hand of Ragnaros":
+        if item.name != GildedRose.SULFURAS:
             item.sell_in -= 1
 
 
