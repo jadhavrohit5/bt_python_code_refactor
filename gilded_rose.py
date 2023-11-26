@@ -15,6 +15,8 @@ class GildedRose(object):
                 pass
             elif item.name == "Backstage passes to a TAFKAL80ETC concert":
                 self._update_backstage_passes(item)
+            elif item.name == "Conjured Mana Cake":
+                self._update_conjured(item)
 
     def _update_aged_brie(self, item):
         if item.quality < GildedRose.MAX_QLTY:
@@ -30,6 +32,13 @@ class GildedRose(object):
                 item.quality += 1
         if item.sell_in < 0:
             item.quality = 0
+        self._update_sell_in(item)
+
+    def _update_conjured(self, item):
+        if item.quality > GildedRose.MIN_QLTY:
+            item.quality -= 2
+        if item.sell_in < GildedRose.MIN_QLTY < item.quality:
+            item.quality -= 2
         self._update_sell_in(item)
 
     def _update_sell_in(self, item):
