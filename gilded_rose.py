@@ -28,6 +28,7 @@ class GildedRose(object):
     def _update_aged_brie(self, item):
         if item.quality < GildedRose.MAX_QLTY:
             item.quality += 1
+        item.quality = max(item.quality, GildedRose.MIN_QLTY)
         self._update_sell_in(item)
 
     def _update_backstage_passes(self, item):
@@ -39,6 +40,7 @@ class GildedRose(object):
                 item.quality += 1
         if item.sell_in < GildedRose.MIN_QLTY:
             item.quality = 0
+        item.quality = max(item.quality, GildedRose.MIN_QLTY)
         self._update_sell_in(item)
 
     def _update_conjured(self, item):
@@ -46,6 +48,7 @@ class GildedRose(object):
             item.quality -= 2
         if item.sell_in < GildedRose.MIN_QLTY < item.quality:
             item.quality -= 2
+        item.quality = max(item.quality, GildedRose.MIN_QLTY)
         self._update_sell_in(item)
 
     def _update_regular_product(self, item):
@@ -53,6 +56,7 @@ class GildedRose(object):
             item.quality -= 1
         if item.sell_in < GildedRose.MIN_QLTY < item.quality:
             item.quality -= 1
+        item.quality = max(item.quality, GildedRose.MIN_QLTY)
         self._update_sell_in(item)
 
     def _update_sell_in(self, item):
