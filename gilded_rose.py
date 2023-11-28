@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 class GildedRose(object):
+
+    # Constants for maximum and minimum quality values
     MAX_QLTY = 50
     MIN_QLTY = 0
 
+    # Constants for Item names
     AGED_BRIE = "Aged Brie"
     SULFURAS = "Sulfuras, Hand of Ragnaros"
     BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
@@ -13,6 +16,12 @@ class GildedRose(object):
         self.items = items
 
     def update_quality(self):
+        """
+        Update quality and sell_in values for all items.
+
+        Created on: 2023-11-25
+        Created by: Rohit Jadhav
+        """
         for item in self.items:
             if item.name == GildedRose.AGED_BRIE:
                 self._update_aged_brie(item)
@@ -26,12 +35,26 @@ class GildedRose(object):
                 self._update_regular_product(item)
 
     def _update_aged_brie(self, item):
+        """
+        Update logic for Aged Brie items.
+        :param item: Item instance
+
+        Created on: 2023-11-25
+        Created by: Rohit Jadhav
+        """
         if item.quality < GildedRose.MAX_QLTY:
             item.quality += 1
         item.quality = min(item.quality, GildedRose.MAX_QLTY)
         self._update_sell_in(item)
 
     def _update_backstage_passes(self, item):
+        """
+        Update logic for Backstage Passes items.
+        :param item: Item instance
+
+        Created on: 2023-11-25
+        Created by: Rohit Jadhav
+        """
         if item.quality < GildedRose.MAX_QLTY:
             item.quality += 1
             if item.sell_in < 11 and item.quality < GildedRose.MAX_QLTY:
@@ -44,6 +67,13 @@ class GildedRose(object):
         self._update_sell_in(item)
 
     def _update_conjured(self, item):
+        """
+        Update logic for Conjured items.
+        :param item: Item instance
+
+        Created on: 2023-11-26
+        Created by: Rohit Jadhav
+        """
         if item.quality > GildedRose.MIN_QLTY:
             item.quality -= 2
         if item.sell_in < GildedRose.MIN_QLTY < item.quality:
@@ -52,6 +82,13 @@ class GildedRose(object):
         self._update_sell_in(item)
 
     def _update_regular_product(self, item):
+        """
+        Update logic for regular items.
+        :param item: Item instance
+
+        Created on: 2023-11-26
+        Created by: Rohit Jadhav
+        """
         if item.quality > GildedRose.MIN_QLTY:
             item.quality -= 1
         if item.sell_in < GildedRose.MIN_QLTY < item.quality:
@@ -60,6 +97,13 @@ class GildedRose(object):
         self._update_sell_in(item)
 
     def _update_sell_in(self, item):
+        """
+        Update sell_in value.
+        :param item: Item instance
+
+        Created on: 2023-11-25
+        Created by: Rohit Jadhav
+        """
         if item.name != GildedRose.SULFURAS:
             item.sell_in -= 1
 

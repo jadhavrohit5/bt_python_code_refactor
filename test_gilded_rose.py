@@ -6,6 +6,12 @@ from gilded_rose import Item, GildedRose
 
 class GildedRoseTest(unittest.TestCase):
     def test_conjured_item(self):
+        """
+        Check Conjured item unit test cases
+
+        Created on: 2023-11-27
+        Created by: Rohit Jadhav
+        """
         # Test 1: Degrades 2x faster
         item = Item("Conjured Mana Cake", 10, 20)
         gilded_rose = GildedRose([item])
