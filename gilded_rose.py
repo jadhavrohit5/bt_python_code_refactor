@@ -40,8 +40,10 @@ class GildedRose(object):
         Created on: 2023-11-25
         Created by: Rohit Jadhav
         """
-        if item.quality < GildedRose.MAX_QUALITY:
+        if item.sell_in > 0:
             item.quality += 1
+        else:
+            item.quality += 2
         item.quality = min(item.quality, GildedRose.MAX_QUALITY)
         self._update_sell_in(item)
 
