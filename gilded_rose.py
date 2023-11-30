@@ -14,6 +14,7 @@ class GildedRose(object):
 
     def __init__(self, items):
         self.items = items
+        # Dictionary to map item names to their corresponding update functions
         self.update_functions = {
             self.AGED_BRIE: self._update_aged_brie,
             self.SULFURAS: self._update_sulfuras,
@@ -29,7 +30,9 @@ class GildedRose(object):
         Created by: Rohit Jadhav
         """
         for item in self.items:
+            # Get the appropriate update function for the item
             update_function = self.update_functions.get(item.name, self._update_regular_product)
+            # Call the update function for the item
             update_function(item)
 
     def _update_aged_brie(self, item):
@@ -40,11 +43,14 @@ class GildedRose(object):
         Created on: 2023-11-25
         Created by: Rohit Jadhav
         """
+        # Increase quality for Aged Brie, considering sell_in value
         if item.sell_in > 0:
             item.quality += 1
         else:
             item.quality += 2
+        # Ensure quality does not exceed the maximum limit
         item.quality = min(item.quality, GildedRose.MAX_QUALITY)
+        # Update sell_in value
         self._update_sell_in(item)
 
     def _update_sulfuras(self, item):
@@ -58,15 +64,19 @@ class GildedRose(object):
         Created on: 2023-11-25
         Created by: Rohit Jadhav
         """
+        # Increase quality for Backstage Passes based on sell_in value
         if item.quality < GildedRose.MAX_QUALITY:
             item.quality += 1
             if item.sell_in < 11 and item.quality < GildedRose.MAX_QUALITY:
                 item.quality += 1
             if item.sell_in < 6 and item.quality < GildedRose.MAX_QUALITY:
                 item.quality += 1
+        # Reset quality to 0 if sell_in has passed
         if item.sell_in < GildedRose.MIN_QUALITY:
             item.quality = 0
+        # Ensure quality does not exceed the maximum limit
         item.quality = min(item.quality, GildedRose.MAX_QUALITY)
+        # Update sell_in value
         self._update_sell_in(item)
 
     def _update_conjured(self, item):
@@ -77,11 +87,14 @@ class GildedRose(object):
         Created on: 2023-11-26
         Created by: Rohit Jadhav
         """
+        # Decrease quality for Conjured items, considering sell_in value
         if item.quality > GildedRose.MIN_QUALITY:
             item.quality -= 2
         if item.sell_in < GildedRose.MIN_QUALITY < item.quality:
             item.quality -= 2
+        # Ensure quality does not go below the minimum limit
         item.quality = max(item.quality, GildedRose.MIN_QUALITY)
+        # Update sell_in value
         self._update_sell_in(item)
 
     def _update_regular_product(self, item):
@@ -92,11 +105,14 @@ class GildedRose(object):
         Created on: 2023-11-26
         Created by: Rohit Jadhav
         """
+        # Decrease quality for regular items, considering sell_in value
         if item.quality > GildedRose.MIN_QUALITY:
             item.quality -= 1
         if item.sell_in < GildedRose.MIN_QUALITY < item.quality:
             item.quality -= 1
+        # Ensure quality does not go below the minimum limit
         item.quality = max(item.quality, GildedRose.MIN_QUALITY)
+        # Update sell_in value
         self._update_sell_in(item)
 
     def _update_sell_in(self, item):
@@ -107,6 +123,7 @@ class GildedRose(object):
         Created on: 2023-11-25
         Created by: Rohit Jadhav
         """
+        # Decrease sell_in value for all items except Sulfuras
         if item.name != GildedRose.SULFURAS:
             item.sell_in -= 1
 

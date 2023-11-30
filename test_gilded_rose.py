@@ -7,6 +7,12 @@ from gilded_rose import Item, GildedRose
 class GildedRoseTest(unittest.TestCase):
 
     def test_update_aged_brie(self):
+        """
+        Check Aged Brie item unit test cases
+
+        Created on: 2023-11-30
+        Created by: Rohit Jadhav
+        """
         aged_brie = Item("Aged Brie", 5, 30)
         gilded_rose = GildedRose([aged_brie])
 
@@ -27,6 +33,12 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(aged_brie.quality, 50)
 
     def test_update_sulfuras(self):
+        """
+        Check Sulfuras item unit test cases
+
+        Created on: 2023-11-30
+        Created by: Rohit Jadhav
+        """
         sulfuras = Item("Sulfuras, Hand of Ragnaros", 5, 80)
         gilded_rose = GildedRose([sulfuras])
 
@@ -36,6 +48,12 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(sulfuras.sell_in, 5)
 
     def test_update_backstage_passes(self):
+        """
+        Check Backstage passes item unit test cases
+
+        Created on: 2023-11-30
+        Created by: Rohit Jadhav
+        """
         backstage_pass = Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
         gilded_rose = GildedRose([backstage_pass])
 
@@ -87,6 +105,12 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(item.quality, 0)
 
     def test_update_regular_product(self):
+        """
+        Check Regular item unit test cases
+
+        Created on: 2023-11-30
+        Created by: Rohit Jadhav
+        """
         regular_item = Item("Regular Item", 5, 15)
         gilded_rose = GildedRose([regular_item])
 
